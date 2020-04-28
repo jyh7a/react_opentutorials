@@ -7,8 +7,9 @@ import Subject from "./components/Subject";
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      mode: "welcome",
+      mode: "read",
       subject: { title: "WEB", sub: "World Wide Web!!" },
       welcome: { title: "Welcome", desc: "Hello, React!!" },
       contents: [
@@ -32,22 +33,18 @@ class App extends Component {
       _desc = this.state.contents[0].desc;
     }
 
+    console.log("render", this); // App class
+
     return (
       <div className="App">
-        {/* <Subject
+        <Subject
           title={this.state.subject.title}
           sub={this.state.subject.sub}
-        /> */}
-
-        <header>
-          <h1>
-            <a href="/" onClick={function(e){
-              e.preventDefault();
-              alert('hi');
-            }}>{this.state.subject.title}</a>
-          </h1>
-          <p>{this.state.subject.sub}</p>
-        </header>
+          onChangePage={function () {
+            console.log("this is : ", this);
+            this.setState({ mode: "welcome" });
+          }.bind(this)}
+        />
 
         <TOC data={this.state.contents} />
 
